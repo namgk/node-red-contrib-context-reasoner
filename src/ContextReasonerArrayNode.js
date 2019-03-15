@@ -55,4 +55,7 @@ ContextReasonerArrayNode.prototype.setStatusCallback = function(callback) {
   this.onStatus = callback
 };
 
+ContextReasonerArrayNode.prototype.onClose = function() {
+};
+
 module.exports = ContextReasonerArrayNode
