@@ -1,0 +1,81 @@
+f<!--
+  Copyright 2014 Sense Tecnic Systems, Inc.
+
+  Licensed under the Apache License, Version 2.0 (the "License");
+  you may not use this file except in compliance with the License.
+  You may obtain a copy of the License at
+
+  http://www.apache.org/licenses/LICENSE-2.0
+
+  Unless required by applicable law or agreed to in writing, software
+  distributed under the License is distributed on an "AS IS" BASIS,
+  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  See the License for the specific language governing permissions and
+  limitations under the License.
+-->
+<script type="text/x-red" data-template-name="context reasoner">
+  <div class="form-tips"><p>Select context source</p></div>
+
+  <div class="form-row">
+      <label for="node-input-source"><i class="fa fa-dot-circle-o"></i> Source </label>
+      <input type="text" id="node-input-source" style="width:70%;">
+      <input type="hidden" id="node-input-sourceType">
+  </div>
+
+  <div class="form-row">
+    <label for="node-input-name"><i class="fa fa-tag"></i> <span data-i18n="node-red:common.label.name"></span></label>
+    <input type="text" id="node-input-name" data-i18n="[placeholder]node-red:common.label.name">
+  </div>
+
+</script>
+
+<script type="text/x-red" data-help-name="context reasoner">
+    <p>This node evaluate msg.payload based on a given context </p>
+</script>
+
+<style type="text/css">
+  .node_label_white {
+    fill: white;
+  }
+
+  .node_label_white_italic {
+    fill: white;
+    font-style: italic;
+  }
+  #palette_node_context_reasoner > div.palette_label {
+    color: white;
+  }
+</style>
+
+<script type="text/javascript">
+
+  RED.nodes.registerType('context reasoner',{
+    category: 'function',
+    defaults: {
+      name: { value:"" },
+      source: { value:"context", required: true },
+      sourceType: { value:"global" }
+    },
+    color:"#9A031E",
+    inputs: 1,
+    outputs:1,
+    align: "left",
+    label: function() {
+        return this.name || "context reasoner";
+    },
+    labelStyle: function() {
+      return this.name ? "node_label_white_italic" : "node_label_white";
+    },
+    oneditprepare: function() {
+      $("#node-input-source").typedInput({
+        default:'global',
+        typeField: $("#node-input-sourceType"),
+        types:['msg', 'flow', 'global']
+      });
+    }
+  });
+</script>
+
+
+
+
