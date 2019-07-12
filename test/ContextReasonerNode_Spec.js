@@ -4,6 +4,24 @@ const ContextReasonerNode = require('../src/ContextReasonerNode');
 
 describe('ContextReasoner Node', function() {
 	describe('Edge cases', function(){
+		it('weird payload', function(done) {
+			const node = new ContextReasonerNode({
+				source: "ctx",
+				sourceType:"global"
+			});
+
+			const testMsg = {payload: false};
+			node.onInput(testMsg, { global: { get: () => ({ a: 5}) }}, function(result){
+			  done(1);
+			}, (err) => {
+				if (err === 'wrong input'){
+					done();
+				} else {
+					done(err);
+				}
+			});
+		})
+
 		it('msg without expression in payload', function(done) {
 			const node = new ContextReasonerNode({
 				source: "ctx",
@@ -40,7 +58,7 @@ describe('ContextReasoner Node', function() {
 			});
 		});
 	})
-
+	// typeof msg.payload !== 'object'
 
   describe('Filter msg based on context', function() {
     it('should output satisfied msg', function(done) {
